@@ -35,6 +35,28 @@ namespace TodoList.Services.Tests
         }
 
         [Fact]
+        public void GetTodoItems()
+        {
+            // Arrange
+            var todoItemOne = new TodoItem { Description = "One", Completed = true };
+            var todoItemTwo = new TodoItem { Description = "One", Completed = false };
+            var todoItemThree = new TodoItem { Description = "One", Completed = false };
+
+            _mockTodoItemRepository
+                .Setup(x => x.GetTodoItems())
+                .Returns(new [] { todoItemOne, todoItemTwo, todoItemThree });
+
+            // Act
+            var result = _todoItemService.GetTodoItems();
+
+            // Assert
+            Assert.Equal(3, result.Count());
+            Assert.Equal(todoItemOne, result.ElementAt(0));
+            Assert.Equal(todoItemTwo, result.ElementAt(1));
+            Assert.Equal(todoItemThree, result.ElementAt(2));
+        }
+
+        [Fact]
         public void GetActiveTodoItems()
         {
             // Arrange

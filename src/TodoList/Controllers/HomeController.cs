@@ -21,19 +21,16 @@ namespace TodoList.Controllers
         
         public IActionResult Index()
         {
-            return View();
+            var todoItems = _todoItemService.GetTodoItems();
+
+            return View(MapToTodoItemModel(todoItems));
         }
         
         public IActionResult ActiveItems()
         {
             var todoItems = _todoItemService.GetActiveTodoItems();
-            var todoItemModels = todoItems.Select(x => new TodoItemModel
-            {
-                Id = x._id.ToString(),
-                Description = x.Description
-            });
                         
-            return View(todoItemModels);
+            return View(MapToTodoItemModel(todoItems));
         }
 
         [HttpGet]
@@ -64,6 +61,18 @@ namespace TodoList.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        private IEnumerable<TodoItemModel> MapToTodoItemModel(IEnumerable<TodoItem> todoItems)
+        {
+            var todoItemModels = todoItems.Select(x => new TodoItemModel
+            {
+                Id = x._id.ToString(),
+                Description = x.Description,
+                Completed = x.Completed
+            });
+
+            return todoItemModels;
         }
     }
 }

@@ -22,6 +22,11 @@ namespace TodoList.Services
             return await _todoItemRepository.InsertTodoItem(todoItem);
         }
 
+        public IEnumerable<TodoItem> GetTodoItems()
+        {
+            return _todoItemRepository.GetTodoItems();
+        }
+
         public IEnumerable<TodoItem> GetActiveTodoItems()
         {
             var todoItems = _todoItemRepository.GetTodoItems();

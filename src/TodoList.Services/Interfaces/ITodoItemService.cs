@@ -8,6 +8,8 @@ namespace TodoList.Services.Interfaces
     {
         Task<TodoItem> InsertTodoItem(TodoItem todoItem);
 
+        IEnumerable<TodoItem> GetTodoItems();
+
         IEnumerable<TodoItem> GetActiveTodoItems();
 
         Task TickActiveTodoItem(string id);

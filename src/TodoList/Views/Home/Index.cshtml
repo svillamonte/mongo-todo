@@ -1,7 +1,25 @@
+@model IEnumerable<TodoList.Models.TodoItemModel>
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    <h1>Hola</h1>
-</div>
+<h1>All items</h1>
+
+<ul>
+    @foreach (var todoItem in Model)
+    {
+        <li>
+            @todoItem.Description
+            &nbsp;
+            @if (todoItem.Completed) 
+            {
+                @:COMPLETE    
+            }
+            else
+            {
+                @:INCOMPLETE
+            }
+        </li>
+    }
+</ul>
