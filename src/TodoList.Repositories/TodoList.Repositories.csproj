@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../TodoList.Models/TodoList.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.4.4" />
+    <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
+  </ItemGroup>
+</Project>
