@@ -19,9 +19,22 @@ namespace TodoList.Controllers
             _todoItemService = todoItemService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(TodoItemModel todoItemModel)
+        {
+            var todoItem = new TodoItem
+            {
+                Description = todoItemModel.Description
+            };
+            await _todoItemService.InsertTodoItem(todoItem);
+
+            return View(new TodoItemModel());
         }
 
         public IActionResult About()
