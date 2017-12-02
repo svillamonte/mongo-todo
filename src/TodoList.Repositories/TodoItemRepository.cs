@@ -9,15 +9,11 @@ namespace TodoList.Repositories
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        private readonly IMongoClient _mongoClient;
-        private readonly IMongoDatabase _database;
         private readonly IMongoCollection<TodoItem> _collection;
 
-        public TodoItemRepository()
+        public TodoItemRepository(IMongoDatabase database)
         {
-            _mongoClient = new MongoClient("mongodb://todo:123456@ds044667.mlab.com:44667/todo-list");
-            _database = _mongoClient.GetDatabase("todo-list");
-            _collection = _database.GetCollection<TodoItem>("items");
+            _collection = database.GetCollection<TodoItem>("items");
         }
 
         public async Task<TodoItem> GetTodoItem(string id) 

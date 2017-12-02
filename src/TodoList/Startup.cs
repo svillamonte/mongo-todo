@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using TodoList.Repositories;
 using TodoList.Repositories.Interfaces;
 using TodoList.Services;
@@ -31,6 +32,10 @@ namespace TodoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var dbClient = new MongoClient(Configuration["DatabaseSettings:ConnectionString"]);
+            var database = dbClient.GetDatabase(Configuration["DatabaseSettings:Name"]);
+
+            services.AddSingleton<IMongoDatabase>(database);
             services.AddScoped<ITodoItemRepository, TodoItemRepository>();
             services.AddScoped<ITodoItemService, TodoItemService>();
 
