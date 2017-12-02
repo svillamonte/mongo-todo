@@ -1,0 +1,21 @@
+@model TodoList.Models.TodoItemModel
+
+@{
+    ViewData["Title"] = "Add new item";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddItem" role="form">
+            <div class="form-group">
+                <label class="control-label">Add new item</label>
+                <div>
+                    <input asp-for="Description" class="form-control" />
+                </div>
+            </div>
+
+            <button type="submit">Add</button>
+
+        </form>        
+    </div>
+</div>
