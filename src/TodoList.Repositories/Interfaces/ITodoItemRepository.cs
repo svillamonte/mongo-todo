@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TodoList.Models;
 
@@ -8,5 +9,7 @@ namespace TodoList.Repositories.Interfaces
         Task<TodoItem> GetTodoItem(string id);
 
         Task<TodoItem> InsertTodoItem(TodoItem todoItem);
+
+        IEnumerable<TodoItem> GetTodoItems();
     }
 }

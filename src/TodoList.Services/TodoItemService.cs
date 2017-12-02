@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Repositories.Interfaces;
@@ -18,6 +20,13 @@ namespace TodoList.Services
         public async Task<TodoItem> InsertTodoItem(TodoItem todoItem)
         {
             return await _todoItemRepository.InsertTodoItem(todoItem);
+        }
+
+        public IEnumerable<TodoItem> GetActiveTodoItems()
+        {
+            var todoItems = _todoItemRepository.GetTodoItems();
+
+            return todoItems.Where(x => !x.Completed);
         }
     }
 }

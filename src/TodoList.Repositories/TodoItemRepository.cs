@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -29,6 +30,11 @@ namespace TodoList.Repositories
         {
             await _collection.InsertOneAsync(todoItem);
             return await GetTodoItem(todoItem._id.ToString());
+        }
+
+        public IEnumerable<TodoItem> GetTodoItems()
+        {
+            return _collection.Find(new BsonDocument()).ToEnumerable();
         }
     }
 }

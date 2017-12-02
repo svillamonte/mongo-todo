@@ -37,18 +37,15 @@ namespace TodoList.Controllers
             return View(new TodoItemModel());
         }
 
-        public IActionResult About()
+        public IActionResult ActiveItems()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var todoItems = _todoItemService.GetActiveTodoItems();
+            var todoItemModels = todoItems.Select(x => new TodoItemModel
+            {
+                Description = x.Description
+            });
+                        
+            return View(todoItemModels);
         }
 
         public IActionResult Error()

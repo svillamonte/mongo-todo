@@ -1,0 +1,14 @@
+@model IEnumerable<TodoList.Models.TodoItemModel>
+
+@{
+    ViewData["Title"] = "Active items";
+}
+
+<h1>Active items</h1>
+
+<ul>
+    @foreach (var todoItem in Model)
+    {
+        <li>@todoItem.Description</li>
+    }
+</ul>
