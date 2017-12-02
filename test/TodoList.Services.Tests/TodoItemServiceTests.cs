@@ -39,8 +39,8 @@ namespace TodoList.Services.Tests
         {
             // Arrange
             var todoItemOne = new TodoItem { Description = "One", Completed = true };
-            var todoItemTwo = new TodoItem { Description = "One", Completed = false };
-            var todoItemThree = new TodoItem { Description = "One", Completed = false };
+            var todoItemTwo = new TodoItem { Description = "Two", Completed = false };
+            var todoItemThree = new TodoItem { Description = "Three", Completed = false };
 
             _mockTodoItemRepository
                 .Setup(x => x.GetTodoItems())
