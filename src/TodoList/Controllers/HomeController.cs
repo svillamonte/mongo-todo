@@ -21,41 +21,69 @@ namespace TodoList.Controllers
         
         public IActionResult Index()
         {
-            var todoItems = _todoItemService.GetTodoItems();
+            try 
+            {
+                var todoItems = _todoItemService.GetTodoItems();
 
-            return View(MapToTodoItemModel(todoItems));
+                return View(MapToTodoItemModel(todoItems));
+            }
+            catch
+            {
+                return View(new TodoItemModel[0]);
+            }            
         }
         
         public IActionResult ActiveItems()
         {
-            var todoItems = _todoItemService.GetActiveTodoItems();
+            try 
+            {
+                var todoItems = _todoItemService.GetActiveTodoItems();
                         
-            return View(MapToTodoItemModel(todoItems));
+                return View(MapToTodoItemModel(todoItems));
+            }
+            catch
+            {
+                return View(new TodoItemModel[0]);
+            }            
         }
 
         [HttpGet]
         public IActionResult AddItem() 
         {
-            return View();
+            return View(new TodoItemModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> AddItem(TodoItemModel todoItemModel)
         {
-            var todoItem = new TodoItem
+            try
             {
-                Description = todoItemModel.Description
-            };
-            await _todoItemService.InsertTodoItem(todoItem);
+                var todoItem = new TodoItem
+                {
+                    Description = todoItemModel.Description
+                };
+                await _todoItemService.InsertTodoItem(todoItem);
 
-            return View(new TodoItemModel());
+                return View(new TodoItemModel());
+            }
+            catch
+            {
+                return View(new TodoItemModel { ShowError = true });
+            }            
         }
 
         public async Task<IActionResult> TickItem(string id) 
         {
-            await _todoItemService.TickActiveTodoItem(id);
+            try 
+            {
+                await _todoItemService.TickActiveTodoItem(id);
 
-            return RedirectToAction("ActiveItems");
+                return RedirectToAction("ActiveItems");
+            }
+            catch
+            {
+                return RedirectToAction("ActiveItems");
+            }            
         }
 
         public IActionResult Error()

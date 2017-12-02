@@ -6,13 +6,20 @@
 
 <h1>Active items</h1>
 
-<ul>
-    @foreach (var todoItem in Model)
-    {
-        <li>
-            @todoItem.Description
-            &nbsp;
-            <a asp-action="TickItem" asp-route-id="@todoItem.Id">Mark as done</a>
-        </li>
-    }
-</ul>
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var todoItem in Model)
+        {
+            <li>
+                @todoItem.Description
+                &nbsp;
+                <a asp-action="TickItem" asp-route-id="@todoItem.Id">Mark as done</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    @Html.Partial("_ErrorMessage")
+}

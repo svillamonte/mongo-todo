@@ -5,6 +5,13 @@
 }
 
 <div class="row">
+    @if (Model.ShowError)
+    {
+        <div class="alert alert-danger">
+            <strong>Something went wrong...</strong> Could you try again?
+        </div>
+    }
+
     <div class="col-md-12">
         <form asp-action="AddItem" role="form">
             <div class="form-group">
