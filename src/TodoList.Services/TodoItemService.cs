@@ -28,5 +28,13 @@ namespace TodoList.Services
 
             return todoItems.Where(x => !x.Completed);
         }
+
+        public async Task TickActiveTodoItem(string id) 
+        {
+            var todoItem = await _todoItemRepository.GetTodoItem(id);
+            todoItem.Completed = true;
+
+            await _todoItemRepository.UpdateTodoItem(id, todoItem);
+        }
     }
 }

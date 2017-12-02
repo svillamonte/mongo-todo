@@ -9,5 +9,7 @@ namespace TodoList.Services.Interfaces
         Task<TodoItem> InsertTodoItem(TodoItem todoItem);
 
         IEnumerable<TodoItem> GetActiveTodoItems();
+
+        Task TickActiveTodoItem(string id);
     }
 }

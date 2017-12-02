@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Moq;
 using TodoList.Models;
 using TodoList.Repositories.Interfaces;
@@ -53,5 +54,27 @@ namespace TodoList.Services.Tests
             Assert.Equal(todoItemTwo, result.ElementAt(0));
             Assert.Equal(todoItemThree, result.ElementAt(1));
         }
+
+        [Fact]
+        public async Task TickActiveTodoItem() 
+        {
+            // Arrange
+            const string todoItemId = "todoitemid";
+            var todoItem = new TodoItem
+            {
+                Description = "A description",
+                Completed = false
+            };
+
+            _mockTodoItemRepository
+                .Setup(x => x.GetTodoItem(todoItemId))
+                .ReturnsAsync(todoItem);
+
+            // Act
+            await _todoItemService.TickActiveTodoItem(todoItemId);
+
+            // Assert
+            _mockTodoItemRepository.Verify(x => x.UpdateTodoItem(todoItemId, todoItem), Times.Once);
+        } 
     }
 }

@@ -36,16 +36,24 @@ namespace TodoList.Controllers
 
             return View(new TodoItemModel());
         }
-
+        
         public IActionResult ActiveItems()
         {
             var todoItems = _todoItemService.GetActiveTodoItems();
             var todoItemModels = todoItems.Select(x => new TodoItemModel
             {
+                Id = x._id.ToString(),
                 Description = x.Description
             });
                         
             return View(todoItemModels);
+        }
+
+        public async Task<IActionResult> TickItem(string id) 
+        {
+            await _todoItemService.TickActiveTodoItem(id);
+
+            return RedirectToAction("ActiveItems");
         }
 
         public IActionResult Error()

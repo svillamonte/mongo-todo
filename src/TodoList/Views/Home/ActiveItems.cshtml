@@ -9,6 +9,10 @@
 <ul>
     @foreach (var todoItem in Model)
     {
-        <li>@todoItem.Description</li>
+        <li>
+            @todoItem.Description
+            &nbsp;
+            <a asp-action="TickItem" asp-route-id="@todoItem.Id">Mark as done</a>
+        </li>
     }
 </ul>

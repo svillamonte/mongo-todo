@@ -11,5 +11,7 @@ namespace TodoList.Repositories.Interfaces
         Task<TodoItem> InsertTodoItem(TodoItem todoItem);
 
         IEnumerable<TodoItem> GetTodoItems();
+
+        Task UpdateTodoItem(string id, TodoItem todoItem);
     }
 }
